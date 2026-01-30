@@ -1,0 +1,16 @@
+{
+  "name": "html5_course_git_gen",
+  "version": "1.0.0",
+  "description": "Basic Olive Media HTML5 Course ",
+  "main": "src/index.html",
+  "dependencies": {
+    "grunt": "~0.4.5",
+    "grunt-scorm-manifest": "~0.2.0"
+  },
+  "devDependencies": {
+    "grunt-cli": "^1.5.0",
+    "grunt-text-replace": "^0.4.0"
+  },
+  "scripts": {},
+  "author": "Apjhn - Dev2rights for support email ash@dev2rights.co.uk"
+}
