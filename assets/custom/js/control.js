@@ -4,8 +4,6 @@ var $current_video = null;
 var assess_ordered = false;
 var autohide_timeout;
 var bookmark = scorm.getvalue("cmi.location");
-var bookmark = "";
-
 var is_phone_safari_or_uiwebview = /(iPhone|iPod|iosAcademyHQ_App)/i.test(
   navigator.userAgent,
 );
@@ -17,7 +15,6 @@ var myMap = new Map();
 var checked_value = [];
 var itemArr = [];
 var retryCount = 0;
-
 $(function () {
   module_config = config;
   /*var row_frames = parent.document.getElementsByTagName('frameset')[ 0 ];
@@ -748,7 +745,6 @@ function tally_assessment_score() {
 
 function assessment_submit() {
   current_slide = get_current_slide();
-
   if (bookmark.current.question_id == current_slide.questions.length) {
     //console.log(tally_assessment_score);
     score = tally_assessment_score();
@@ -930,11 +926,9 @@ function get_last_slide() {
 }
 
 function get_current_slide() {
-  var data =
-    module_config?.sections[bookmark.current?.section_id - 1]?.slides[
-      bookmark?.current.slide_id - 1
-    ];
-  return data;
+  return module_config.sections[bookmark.current.section_id - 1].slides[
+    bookmark.current.slide_id - 1
+  ];
 }
 
 function get_prev_slide() {
@@ -1326,13 +1320,13 @@ function update_progress() {
   var progress = Math.min(completedSlides / totalSlides, 1);
   progress = Math.round(progress * 100) / 100;
 
-  console.log("progress=====>", progress);
+  var existingProgress =
+    parseFloat(scorm.getvalue("cmi.progress_measure")) || 0;
+
+  if (progress <= existingProgress) return;
 
   scorm.setvalue("cmi.progress_measure", progress.toString());
-  scorm.setvalue(
-    "cmi.completion_status",
-    progress >= 1 ? "completed" : "incomplete",
-  );
+
   scorm.commit();
 }
 
